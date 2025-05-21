@@ -5,31 +5,35 @@ using Game.UI;
 using QFramework;
 using UnityEngine;
 
-public class Launch : MonoBehaviour, IController
+namespace Game
 {
-    private void Awake()
+    public enum LaunchState
     {
-        DontDestroyOnLoad(gameObject);
+        Init,
+        Main,
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class Launch : MonoBehaviour, IController
     {
-        // 启动状态机
-        
-        InitAsync().Forget();
-    }
+        public FSM<LaunchState> Fsm = new FSM<LaunchState>();
 
-    private async UniTask InitAsync()
-    {
-        await this.GetSystem<YooassetSystem>().InitAsync();
-        var resLoader = ResLoader.Allocate();
-        await resLoader.LoadSceneUniTask("Main");
-        await UIKit.OpenPanel<UITestPanel>();
-    }
-    
-    public IArchitecture GetArchitecture()
-    {
-        return Game.MainArchitecture.Interface;
+        private void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        void Start()
+        {
+            // 启动状态机
+            Fsm.AddState(LaunchState.Init, new InitState(Fsm, this));
+
+            Fsm.StartState(LaunchState.Init);
+        }
+
+        public IArchitecture GetArchitecture()
+        {
+            return Game.MainArchitecture.Interface;
+        }
     }
 }

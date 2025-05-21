@@ -23,6 +23,8 @@ public class Launch : MonoBehaviour, IController
     private async UniTask InitAsync()
     {
         await this.GetSystem<YooassetSystem>().InitAsync();
+        var resLoader = ResLoader.Allocate();
+        await resLoader.LoadSceneUniTask("Main");
         await UIKit.OpenPanel<UITestPanel>();
     }
     

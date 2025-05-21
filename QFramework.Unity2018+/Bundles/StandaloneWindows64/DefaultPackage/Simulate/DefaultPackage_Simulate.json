@@ -8,7 +8,7 @@
     "BuildPipeline": "EditorSimulateBuildPipeline",
     "PackageName": "DefaultPackage",
     "PackageVersion": "Simulate",
-    "PackageNote": "2025/5/21 16:27:23",
+    "PackageNote": "2025/5/21 16:35:58",
     "AssetList": [
         {
             "Address": "UITestPanel",
@@ -16,6 +16,14 @@
             "AssetGUID": "",
             "AssetTags": [],
             "BundleID": 0,
+            "DependBundleIDs": []
+        },
+        {
+            "Address": "Main",
+            "AssetPath": "Assets/Game/Scenes/Main.unity",
+            "AssetGUID": "",
+            "AssetTags": [],
+            "BundleID": 1,
             "DependBundleIDs": []
         }
     ],
@@ -26,6 +34,16 @@
             "FileHash": "cd797d16784194167a19c9ee3456ed70",
             "FileCRC": "00000000",
             "FileSize": 8077,
+            "Encrypted": false,
+            "Tags": [],
+            "DependBundleIDs": []
+        },
+        {
+            "BundleName": "assets_game_scenes.bundle",
+            "UnityCRC": 0,
+            "FileHash": "664287cbc8784424800b5e9bd97ebde3",
+            "FileCRC": "00000000",
+            "FileSize": 8160,
             "Encrypted": false,
             "Tags": [],
             "DependBundleIDs": []

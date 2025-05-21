@@ -155,7 +155,7 @@ namespace QFramework
 		    var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 		    foreach (var a in assemblies)
 		    {
-			    if (a.FullName.StartsWith("Assembly-CSharp,"))
+			    if (a.FullName.StartsWith("Game.Main,"))
 			    {
 				    return a;
 			    }

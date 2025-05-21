@@ -7,6 +7,7 @@
  ****************************************************************************/
 
 using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace QFramework
@@ -50,25 +51,13 @@ UIKit.OpenPanel<UIHomePanel>(new UIHomePanelData()
 UIKit.OpenPanel<UIHomePanel>(UILevel.Common);  
 ")]
 #endif
-        public static T OpenPanel<T>(PanelOpenType panelOpenType, UILevel canvasLevel = UILevel.Common,
+        public static async UniTask<T> OpenPanel<T>(PanelOpenType panelOpenType, UILevel canvasLevel = UILevel.Common,
             IUIData uiData = null,
             string assetBundleName = null,
             string prefabName = null) where T : UIPanel
         {
-            var panelSearchKeys = PanelSearchKeys.Allocate();
-
-            panelSearchKeys.OpenType = panelOpenType;
-            panelSearchKeys.Level = canvasLevel;
-            panelSearchKeys.PanelType = typeof(T);
-            panelSearchKeys.AssetBundleName = assetBundleName;
-            panelSearchKeys.GameObjName = prefabName;
-            panelSearchKeys.UIData = uiData;
-
-            T retPanel = UIManager.Instance.OpenUI(panelSearchKeys) as T;
-
-            panelSearchKeys.Recycle2Cache();
-
-            return retPanel;
+            await OpenPanelAsync<T>(panelOpenType, canvasLevel, uiData, assetBundleName, prefabName);
+            return GetPanel<T>();
         }
 
         private static WaitForEndOfFrame mWaitForEndOfFrame = new WaitForEndOfFrame();
@@ -85,13 +74,20 @@ yield return UIKit.OpenPanelAsync<UIHomePanel>();
 UIKit.OpenPanelAsync<UIHomePanel>().ToAction().Start(this);
 ")]
 #endif
-        public static IEnumerator OpenPanelAsync<T>(UILevel canvasLevel = UILevel.Common, IUIData uiData = null,
+        public static async UniTask OpenPanelAsync<T>(UILevel canvasLevel = UILevel.Common, IUIData uiData = null,
+            string assetBundleName = null,
+            string prefabName = null) where T : UIPanel
+        {
+            await OpenPanelAsync<T>(PanelOpenType.Single, canvasLevel, uiData, assetBundleName, prefabName);
+        }
+        
+        public static async UniTask OpenPanelAsync<T>(PanelOpenType panelOpenType, UILevel canvasLevel = UILevel.Common, IUIData uiData = null,
             string assetBundleName = null,
             string prefabName = null) where T : UIPanel
         {
             var panelSearchKeys = PanelSearchKeys.Allocate();
 
-            panelSearchKeys.OpenType = PanelOpenType.Single;
+            panelSearchKeys.OpenType = panelOpenType;
             panelSearchKeys.Level = canvasLevel;
             panelSearchKeys.PanelType = typeof(T);
             panelSearchKeys.AssetBundleName = assetBundleName;
@@ -100,53 +96,26 @@ UIKit.OpenPanelAsync<UIHomePanel>().ToAction().Start(this);
 
             bool loaded = false;
             UIManager.Instance.OpenUIAsync(panelSearchKeys, panel => { loaded = true; });
-
-            while (!loaded)
-            {
-                yield return mWaitForEndOfFrame;
-            }
+            
+            await UniTask.WaitUntil(() => loaded); 
 
             panelSearchKeys.Recycle2Cache();
         }
 
-        public static T OpenPanel<T>(UILevel canvasLevel = UILevel.Common, IUIData uiData = null,
+        public static async UniTask<T> OpenPanel<T>(UILevel canvasLevel = UILevel.Common, IUIData uiData = null,
             string assetBundleName = null,
             string prefabName = null) where T : UIPanel
         {
-            var panelSearchKeys = PanelSearchKeys.Allocate();
-
-            panelSearchKeys.OpenType = PanelOpenType.Single;
-            panelSearchKeys.Level = canvasLevel;
-            panelSearchKeys.PanelType = typeof(T);
-            panelSearchKeys.AssetBundleName = assetBundleName;
-            panelSearchKeys.GameObjName = prefabName;
-            panelSearchKeys.UIData = uiData;
-
-            T retPanel = UIManager.Instance.OpenUI(panelSearchKeys) as T;
-
-            panelSearchKeys.Recycle2Cache();
-
-            return retPanel;
+            await OpenPanelAsync<T>(canvasLevel, uiData, assetBundleName, prefabName);
+            return GetPanel<T>();
         }
 
-        public static T OpenPanel<T>(IUIData uiData, PanelOpenType panelOpenType = PanelOpenType.Single,
+        public static async UniTask<T> OpenPanel<T>(IUIData uiData, PanelOpenType panelOpenType = PanelOpenType.Single,
             string assetBundleName = null,
             string prefabName = null) where T : UIPanel
         {
-            var panelSearchKeys = PanelSearchKeys.Allocate();
-
-            panelSearchKeys.OpenType = panelOpenType;
-            panelSearchKeys.Level = UILevel.Common;
-            panelSearchKeys.PanelType = typeof(T);
-            panelSearchKeys.AssetBundleName = assetBundleName;
-            panelSearchKeys.GameObjName = prefabName;
-            panelSearchKeys.UIData = uiData;
-
-            T retPanel = UIManager.Instance.OpenUI(panelSearchKeys) as T;
-
-            panelSearchKeys.Recycle2Cache();
-
-            return retPanel;
+            await OpenPanelAsync<T>(panelOpenType, UILevel.Common, uiData, assetBundleName, prefabName);
+            return GetPanel<T>();
         }
 
 #if UNITY_EDITOR

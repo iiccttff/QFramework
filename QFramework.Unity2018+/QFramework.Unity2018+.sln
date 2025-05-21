@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniTask", "UniTask.csproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResKit", "ResKit.csproj", "{0d763b93-38b4-ed5a-689e-1d7901b442d3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{50112905-cb69-a3d0-3cda-6aa0b545e475}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupportOldQF", "SupportOldQF.csproj", "{86259951-5f96-2237-0b9f-dbf0e8c5d314}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game.Main", "Game.Main.csproj", "{0a2d8c9a-8a01-95b7-93f2-b25ab67409c0}"
@@ -39,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniTask.Addressables", "Uni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniTask.DOTween", "UniTask.DOTween.csproj", "{525de3f6-edb0-36aa-7430-1c82717abebf}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{50112905-cb69-a3d0-3cda-6aa0b545e475}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,8 +54,6 @@ Global
 		{04c7f71b-0a33-bbb7-9f86-3934bf1f8139}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0d763b93-38b4-ed5a-689e-1d7901b442d3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0d763b93-38b4-ed5a-689e-1d7901b442d3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50112905-cb69-a3d0-3cda-6aa0b545e475}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50112905-cb69-a3d0-3cda-6aa0b545e475}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86259951-5f96-2237-0b9f-dbf0e8c5d314}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{86259951-5f96-2237-0b9f-dbf0e8c5d314}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0a2d8c9a-8a01-95b7-93f2-b25ab67409c0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -82,6 +80,8 @@ Global
 		{cb20271c-4c09-868b-cab0-3c79eb72c49b}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{525de3f6-edb0-36aa-7430-1c82717abebf}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{525de3f6-edb0-36aa-7430-1c82717abebf}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50112905-cb69-a3d0-3cda-6aa0b545e475}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50112905-cb69-a3d0-3cda-6aa0b545e475}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

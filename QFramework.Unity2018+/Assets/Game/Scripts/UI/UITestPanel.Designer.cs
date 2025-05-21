@@ -5,16 +5,19 @@ using QFramework;
 
 namespace Game.UI
 {
-	// Generate Id:38e1e8b3-649b-4807-acfd-be6e45987851
+	// Generate Id:edb88928-b81e-489b-987a-b620a9f2da35
 	public partial class UITestPanel
 	{
 		public const string Name = "UITestPanel";
 		
+		[SerializeField]
+		public UnityEngine.UI.Button TestButton;
 		
 		private UITestPanelData mPrivateData = null;
 		
 		protected override void ClearUIComponents()
 		{
+			TestButton = null;
 			
 			mData = null;
 		}

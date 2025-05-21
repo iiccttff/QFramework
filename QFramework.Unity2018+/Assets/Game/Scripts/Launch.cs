@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Game;
+using Game.UI;
 using QFramework;
 using UnityEngine;
 
@@ -22,6 +23,7 @@ public class Launch : MonoBehaviour, IController
     private async UniTask InitAsync()
     {
         await this.GetSystem<YooassetSystem>().InitAsync();
+        await UIKit.OpenPanel<UITestPanel>();
     }
     
     public IArchitecture GetArchitecture()

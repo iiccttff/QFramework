@@ -45,7 +45,7 @@ namespace QFramework
         private async UniTask LoadAsyncByUniTask()
         {
             var pg = YooAssets.GetPackage(PackageName);
-            _assetHandle = pg.LoadAssetSync<Object>(_location);
+            _assetHandle = pg.LoadAssetAsync<Object>(_location);
             await _assetHandle;
             mAsset = _assetHandle.AssetObject;
 

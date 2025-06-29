@@ -22,20 +22,17 @@ public static class YooAssetsExtensions
 
         var tcs = new UniTaskCompletionSource<T>();
 
+        T obj = null;
+        
         resLoader.Add2Load<T>(assetPath, (success, res) =>
         {
-            if (success && res.Asset is T asset)
-            {
-                tcs.TrySetResult(asset);
-            }
-            else
-            {
-                Debug.LogError($"[LoadAssetAsync] Failed to load asset: {assetPath}");
-                tcs.TrySetResult(null); // 失败时返回 null，而不是抛异常
-            }
+            obj = res.Asset as T;
         });
 
-        resLoader.LoadAsync(() => { }); // 确保回调执行
+        resLoader.LoadAsync(() =>
+        {
+            tcs.TrySetResult(obj);
+        }); // 确保回调执行
 
         // 处理取消情况
         try
